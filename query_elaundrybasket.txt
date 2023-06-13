@@ -1,0 +1,11 @@
+Hibernate: create table cust_address (address_id integer not null auto_increment, city varchar(255), house_no varchar(255), pincode varchar(255), society varchar(255), customer_id integer, primary key (address_id)) engine=InnoDB
+Hibernate: create table customers (customer_id integer not null auto_increment, email varchar(255), first_name varchar(255), last_name varchar(255), mob_no varchar(255), password varchar(255), primary key (customer_id)) engine=InnoDB
+Hibernate: create table orders (order_id integer not null auto_increment, bill float(53) not null, delivery_date date, order_date varchar(255), pick_up_date date, status varchar(255), weight float(53) not null, customer_id integer, service_id integer, primary key (order_id)) engine=InnoDB
+Hibernate: create table service_type (serviceid integer not null auto_increment, price float(53), service varchar(255), primary key (serviceid)) engine=InnoDB
+Hibernate: alter table customers drop index UK_rfbvkrffamfql7cjmen8v976v
+Hibernate: alter table customers add constraint UK_rfbvkrffamfql7cjmen8v976v unique (email)
+Hibernate: alter table customers drop index UK_d8kxi57bdt9d3fye5f2r61dhm
+Hibernate: alter table customers add constraint UK_d8kxi57bdt9d3fye5f2r61dhm unique (mob_no)
+Hibernate: alter table cust_address add constraint FKde79p3i8advcbasrwkmqkiry4 foreign key (customer_id) references customers (customer_id)
+Hibernate: alter table orders add constraint FKpxtb8awmi0dk6smoh2vp1litg foreign key (customer_id) references customers (customer_id)
+Hibernate: alter table orders add constraint FKmvnlxqqmiye4gy2w86v4ggj1s foreign key (service_id) references service_type (serviceid)
